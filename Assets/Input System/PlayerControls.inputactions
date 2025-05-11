@@ -6,7 +6,7 @@
             "id": "ab15ce6b-7450-4ace-a030-8ef1dd8e3a3a",
             "actions": [
                 {
-                    "name": "Light",
+                    "name": "HandLight",
                     "type": "Button",
                     "id": "ef779f86-e0d4-4ef9-a01b-ec0a039ced7d",
                     "expectedControlType": "",
@@ -24,19 +24,19 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Open Door",
-                    "type": "Button",
-                    "id": "01d4e738-da85-4777-b1bd-3608aadd81a4",
-                    "expectedControlType": "",
+                    "name": "Movement",
+                    "type": "PassThrough",
+                    "id": "674c8d01-f2f7-46e8-800a-95b3f48fbecb",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Movement",
-                    "type": "PassThrough",
-                    "id": "674c8d01-f2f7-46e8-800a-95b3f48fbecb",
-                    "expectedControlType": "Vector2",
+                    "name": "DoorInteraction",
+                    "type": "Button",
+                    "id": "3da18a56-acad-4eeb-bd71-8aff4ea76f26",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -50,7 +50,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Light",
+                    "action": "HandLight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -62,17 +62,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a5fe512f-846c-41d1-86d9-c32a45fe6635",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Open Door",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -130,6 +119,17 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "680fdea8-2947-400b-9a27-0b237d4bf9c0",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DoorInteraction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
