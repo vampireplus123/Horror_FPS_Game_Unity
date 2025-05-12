@@ -22,10 +22,13 @@ public abstract class PlayerActionsController : MonoBehaviour,IPlayerConstructor
     private void Awake()
     {
         playerControls = new PlayerControls();
+    }
+
+    void Start()
+    {
         rb = gameObject.GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
     }
 
     private void OnEnable()
@@ -49,9 +52,6 @@ public abstract class PlayerActionsController : MonoBehaviour,IPlayerConstructor
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
         PlayerBody.Rotate(Vector3.up * mouseX);
-
-        Debug.Log("Mouse Delta X: " + mouseX);
-
     }
 
     public virtual void Movement()
