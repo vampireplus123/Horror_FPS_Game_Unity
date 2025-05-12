@@ -383,6 +383,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4125406769022265911, guid: ffbbee778cca64b00b2fa71376cabb3d, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 7942307870939783375, guid: ffbbee778cca64b00b2fa71376cabb3d, type: 3}
+      propertyPath: m_RenderShadows
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8774438314312250422, guid: ffbbee778cca64b00b2fa71376cabb3d, type: 3}
       propertyPath: m_Name
       value: Player
