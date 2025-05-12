@@ -56,8 +56,13 @@ public abstract class PlayerActionsController : MonoBehaviour,IPlayerConstructor
 
     public virtual void Movement()
     {
-        Vector3 moveDirection = new Vector3(moveInput.x,0,moveInput.y);
+        moveInput = playerControls.Player.Movement.ReadValue<Vector2>();
+
+        Vector3 moveDirection = new Vector3(moveInput.x, 0, moveInput.y);
+        moveDirection = PlayerBody.TransformDirection(moveDirection); // Chuyển hướng từ local sang world space
+
         Vector3 velocity = moveDirection * speed;
-        rb.linearVelocity = new Vector3(velocity.x, rb.linearVelocity.y, velocity.z);  // Cập nhật vận tốc của Rigidbody.
-    } 
+        rb.linearVelocity = new Vector3(velocity.x, rb.linearVelocity.y, velocity.z);
+    }
+
 }
