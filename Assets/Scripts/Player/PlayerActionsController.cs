@@ -2,31 +2,32 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
-public abstract class PlayerActionsController : MonoBehaviour,IPlayerConstructor
+public abstract class PlayerActionsController : MonoBehaviour, IPlayerConstructor
 {
-    [SerializeField]  float mouseSensitivity;
-
-    [SerializeField]  float speed;
-
+    [SerializeField] float mouseSensitivity;
+    [SerializeField] float speed;
     [SerializeField] Transform PlayerBody;
+    [SerializeField] float gravity = -9.81f;
+
+
+    private float velocityY = 0f;
+
+
     protected PlayerControls playerControls;
     protected Vector2 mouseLook;
     protected float xRotation = 0f;
-
     protected Vector2 moveInput;
 
-    protected Rigidbody rb;
-
+    protected CharacterController characterController;
 
     private void Awake()
     {
         playerControls = new PlayerControls();
+        characterController = gameObject.GetComponent<CharacterController>();
     }
 
     void Start()
     {
-        rb = gameObject.GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -35,10 +36,12 @@ public abstract class PlayerActionsController : MonoBehaviour,IPlayerConstructor
     {
         playerControls.Enable();
     }
+
     private void OnDisable()
     {
         playerControls.Disable();
     }
+
     public virtual void Look()
     {
         mouseLook = playerControls.Player.Look.ReadValue<Vector2>();
@@ -50,19 +53,29 @@ public abstract class PlayerActionsController : MonoBehaviour,IPlayerConstructor
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-
         PlayerBody.Rotate(Vector3.up * mouseX);
     }
-
     public virtual void Movement()
     {
         moveInput = playerControls.Player.Movement.ReadValue<Vector2>();
-
         Vector3 moveDirection = new Vector3(moveInput.x, 0, moveInput.y);
-        moveDirection = PlayerBody.TransformDirection(moveDirection); // Chuyển hướng từ local sang world space
+        moveDirection = PlayerBody.TransformDirection(moveDirection);
+        moveDirection *= speed;
 
-        Vector3 velocity = moveDirection * speed;
-        rb.linearVelocity = new Vector3(velocity.x, rb.linearVelocity.y, velocity.z);
+        // Kiểm tra nếu đang đứng trên mặt đất thì reset tốc độ rơi
+        if (characterController.isGrounded && velocityY < 0)
+        {
+            velocityY = -2f; // Đảm bảo dính sát mặt đất
+        }
+
+        // Áp lực hấp dẫn
+        velocityY += gravity * Time.deltaTime;
+
+        // Gộp cả hướng di chuyển và rơi
+        moveDirection.y = velocityY;
+
+        // Di chuyển
+        characterController.Move(moveDirection * Time.deltaTime);
     }
 
 }
