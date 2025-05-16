@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DoorParent : MonoBehaviour,IDoor
+public abstract class DoorParent : MonoBehaviour,IDoor
 {
     [SerializeField] Animator animator;
 

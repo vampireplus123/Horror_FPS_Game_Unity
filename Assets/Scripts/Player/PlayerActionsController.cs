@@ -77,5 +77,8 @@ public abstract class PlayerActionsController : MonoBehaviour, IPlayerConstructo
         // Di chuyển
         characterController.Move(moveDirection * Time.deltaTime);
     }
-
+    public int health()
+    {
+        return 100;
+    }
 }
